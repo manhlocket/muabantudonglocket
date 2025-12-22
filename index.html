@@ -270,22 +270,6 @@
         btnNext.innerText = currentStep === steps.length - 1 ? 'Xong ✅' : 'Tiếp →';
     }
 </script> 
-    function copyText(id) {
-    const copyText = document.getElementById(id);
-    
-    // Chọn văn bản trong ô input
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // Dành cho điện thoại
-
-    // Copy vào bộ nhớ tạm
-    navigator.clipboard.writeText(copyText.value).then(() => {
-        // Thông báo đơn giản
-        alert("Đã sao chép: " + copyText.value);
-    }).catch(err => {
-        console.error('Lỗi khi copy: ', err);
-    });
-}
-
 
 </body>
 </html>
