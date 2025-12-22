@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hướng dẫn cài đặt LocketgoldLocketgoldHướng dẫ
+    <title>Hướng dẫn cài đặt Locket</title>
     <style>
         * { box-sizing: border-box; transition: all 0.3s ease; }
         
@@ -67,6 +67,31 @@
             margin-bottom: 20px;
         }
 
+        /* Input Fields cho Trang Đầu */
+        .input-field {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-field input:focus { border-color: #3b82f6; }
+
         .img-grid {
             display: flex;
             gap: 12px;
@@ -121,6 +146,7 @@
             border-radius: 10px;
             border: none;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .note {
@@ -162,9 +188,23 @@
 
 <div class="container">
     <h1>📘 Cài đặt Locket</h1>
-    <div class="progress" id="step-text">Bước 1 / 6</div>
+    <div class="progress" id="step-text">Khởi tạo</div>
 
     <div class="step active">
+        <h2>Xin chào 👋</h2>
+        <p>Vui lòng nhập thông tin để chúng mình hỗ trợ bạn tốt nhất.</p>
+        <div class="input-field">
+            <label>Họ và tên:</label>
+            <input type="text" id="full-name" placeholder="Ví dụ: Nguyễn Văn A">
+        </div>
+        <div class="input-field">
+            <label>Số điện thoại Zalo:</label>
+            <input type="tel" id="zalo-phone" placeholder="Ví dụ: 090xxxxxxx">
+        </div>
+        <div class="note">Thông tin giúp chúng mình nhận diện tài khoản của bạn nhanh hơn.</div>
+    </div>
+
+    <div class="step">
         <h2>Bước 1</h2>
         <p>Xóa ứng dụng <b>Locket</b> khỏi thiết bị của bạn.</p>
         <div class="img-grid">
@@ -232,7 +272,7 @@
 
     <div class="buttons">
         <button class="btn-nav btn-prev" id="btnPrev" onclick="changeStep(-1)" style="visibility: hidden;">← Quay lại</button>
-        <button class="btn-nav btn-next" id="btnNext" onclick="changeStep(1)">Tiếp →</button>
+        <button class="btn-nav btn-next" id="btnNext" onclick="changeStep(1)">Bắt đầu →</button>
     </div>
 </div>
 
@@ -244,15 +284,21 @@
     const btnNext = document.getElementById('btnNext');
 
     function changeStep(n) {
-        // Logic mới: Nếu đang ở Bước 3 (index 2) và nhấn Tiếp (n=1)
-        if (currentStep === 2 && n === 1) {
+        // Kiểm tra trang nhập liệu (Trang 0)
+        if (currentStep === 0 && n === 1) {
+            const name = document.getElementById('full-name').value.trim();
+            const phone = document.getElementById('zalo-phone').value.trim();
+            if (name === "" || phone === "") {
+                alert("Bạn vui lòng điền Họ tên và SĐT nhé!");
+                return;
+            }
+        }
+
+        // Kiểm tra Bước 3 cũ (Nay là index 3 vì có trang 0 ở đầu)
+        if (currentStep === 3 && n === 1) {
             alert("Nhắn tin cho Mạnh để nhận mã xác minh!");
-            // Mở Zalo (Thay số điện thoại của bạn ở đây)
             window.location.href = "https://zalo.me/0559939036"; 
-            
-            // Sau khi mở Zalo, cho phép chuyển sang bước tiếp theo
-            // (Nếu muốn họ phải quay lại mới bấm tiếp được thì bỏ dòng dưới)
-            moveNext(); 
+            moveNext();
             return;
         }
 
@@ -283,9 +329,17 @@
 
     function updateUI() {
         steps[currentStep].classList.add('active');
-        stepText.innerText = `Bước ${currentStep + 1} / ${steps.length}`;
+        
+        // Cập nhật text hiển thị số bước
+        if (currentStep === 0) {
+            stepText.innerText = "Thông tin cá nhân";
+            btnNext.innerText = "Bắt đầu →";
+        } else {
+            stepText.innerText = `Bước ${currentStep} / ${steps.length - 1}`;
+            btnNext.innerText = currentStep === steps.length - 1 ? 'Xong ✅' : 'Tiếp →';
+        }
+        
         btnPrev.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
-        btnNext.innerText = currentStep === steps.length - 1 ? 'Xong ✅' : 'Tiếp →';
     }
 
     function copyText(id, btn) {
