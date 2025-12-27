@@ -1,27 +1,418 @@
-<div class="step">
-    <h2>Bước 2</h2>
-    <p>Đăng xuất App Store và đăng nhập tài khoản được cấp.</p>
-    
-    <div class="img-grid">
-        <img src="IMG_0638.jpeg" style="width: 100%;" alt="Hướng dẫn đăng nhập App Store">
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn cài đặt Locket Gold</title>
+    <style>
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            background: #eef2ff;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: #1e293b;
+        }
+
+        .progress {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            background: #f1f5f9;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .step {
+            display: none;
+            text-align: left;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .step.active { display: block; }
+
+        .step h2 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-field input:focus { border-color: #3b82f6; }
+
+        .img-grid {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .img-grid img {
+            width: 48%;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            object-fit: cover;
+        }
+
+        .btn-link-dns {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #ef4444;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 15px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-link-dns:hover { transform: scale(1.02); background: #dc2626; }
+
+        .account-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 15px;
+            border-radius: 16px;
+            margin: 15px 0;
+        }
+
+        .input-group { margin-bottom: 12px; }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .copy-wrapper {
+            display: flex;
+            gap: 8px;
+        }
+
+        .copy-wrapper input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fff;
+            outline: none;
+            color: #334155;
+            font-family: monospace;
+        }
+
+        .btn-copy {
+            padding: 8px 15px;
+            background: #10b981;
+            color: white;
+            font-size: 13px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .note {
+            background: #fffbeb;
+            padding: 12px;
+            border-left: 4px solid #f59e0b;
+            font-size: 13px;
+            border-radius: 8px;
+            margin-top: 10px;
+            color: #92400e;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn-nav {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-prev { background: #f1f5f9; color: #475569; }
+        .btn-next { background: #3b82f6; color: #fff; }
+        .btn-next:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📘 Cài đặt Locket</h1>
+    <div class="progress" id="step-text">Khởi tạo</div>
+
+    <div class="step active">
+        <h2>Xin chào 👋</h2>
+        <p>Vui lòng nhập thông tin để chúng mình hỗ trợ bạn tốt nhất.</p>
+        <div class="input-field">
+            <label>Họ và tên:</label>
+            <input type="text" id="full-name" placeholder="Ví dụ: Nguyễn Văn A">
+        </div>
+        <div class="input-field">
+            <label>Số điện thoại Zalo:</label>
+            <input type="tel" id="zalo-phone" placeholder="Ví dụ: 090xxxxxxx">
+        </div>
+        <div class="note">Thông tin giúp chúng mình nhận diện tài khoản của bạn nhanh hơn.</div>
     </div>
 
-    <div class="note">⚠️ KHÔNG đăng nhập vào Cài đặt (Settings) của máy.</div>
+    <div class="step">
+        <h2>Bước 1</h2>
+        <p>Xóa ứng dụng <b>Locket</b> cũ khỏi thiết bị của bạn.</p>
+        <div class="img-grid">
+            <img src="IMG_0627.png" alt="Xóa app 1">
+            <img src="IMG_0628.jpeg" alt="Xóa app 2">
+        </div>
+    </div>
 
-    <div class="account-box">
-        <div class="input-group">
-            <label>Tài khoản:</label>
-            <div class="copy-wrapper">
-                <input type="text" value="manhvietle07@gmail.com" id="user" readonly>
-                <button class="btn-copy" onclick="copyText('user', this)">Sao chép</button>
+    <div class="step">
+        <h2>Bước 2</h2>
+        <p>Vào <b>App Store</b> và tải ứng dụng <b>TestFlight</b>.</p>
+        <div class="img-grid">
+            <img src="IMG_0634.jpeg" style="width: 100%;" alt="Cài TestFlight">
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Bước 3</h2>
+        <p>Đăng xuất App Store hiện tại và đăng nhập tài khoản bên dưới.</p>
+        
+        <div class="img-grid">
+            <img src="IMG_0638.jpeg" style="width: 100%;" alt="Đăng nhập tài khoản">
+        </div>
+
+        <div class="note">⚠️ <b>CỰC KỲ QUAN TRỌNG:</b> KHÔNG đăng nhập vào Cài đặt (Settings/iCloud). Chỉ đăng nhập trong App Store.</div>
+        
+        <div class="account-box">
+            <div class="input-group">
+                <label>Tài khoản:</label>
+                <div class="copy-wrapper">
+                    <input type="text" value="manhvietle07@gmail.com" id="user" readonly>
+                    <button class="btn-copy" onclick="copyText('user', this)">Sao chép</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Mật khẩu:</label>
+                <div class="copy-wrapper">
+                    <input type="text" value="Vipp123xyz@" id="pass" readonly>
+                    <button class="btn-copy" onclick="copyText('pass', this)">Sao chép</button>
+                </div>
             </div>
         </div>
-        <div class="input-group">
-            <label>Mật khẩu:</label>
-            <div class="copy-wrapper">
-                <input type="text" value="Vipp123xyz@" id="pass" readonly>
-                <button class="btn-copy" onclick="copyText('pass', this)">Sao chép</button>
-            </div>
+    </div>
+
+    <div class="step">
+        <h2>Bước 4</h2>
+        <p>Mở ứng dụng <b>TestFlight</b> vừa tải và cài đặt <b>Locket</b> từ đó.</p>
+        <div class="img-grid">
+            <img src="IMG_0635.jpeg" style="width: 100%;" alt="Cài Locket">
         </div>
+    </div>
+
+    <div class="step">
+        <h2>Bước 5</h2>
+        <p>Mở Locket lên và chọn dòng <b>Khôi phục đơn hàng (Restore)</b> ở phía dưới.</p>
+        <div class="img-grid">
+            <img src="IMG_0636.jpeg" style="width: 100%;" alt="Khôi phục">
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>Bước 6</h2>
+        <p>Nhấp vào nút đỏ bên dưới để cài đặt cấu hình DNS:</p>
+        <a href="https://vnkienn.github.io/DNS/Locketgoldclick.mobileconfig" class="btn-link-dns">Cài đặt DNS Gold 🚀</a>
+        <div class="img-grid">
+            <img src="IMG_0745.jpeg" style="width: 100%;" alt="Hướng dẫn cài DNS">
+        </div>
+        <div class="note">Sau khi nhấn tải, vào <b>Cài đặt máy > Đã tải về hồ sơ</b> để xác nhận cài đặt.</div>
+    </div>
+
+    <div class="step">
+        <h2>Hoàn tất 🎉</h2>
+        <p>Giờ bạn có thể Đăng xuất tài khoản App Store và sử dụng Locket Gold bình thường.</p>
+        <div class="img-grid">
+            <img src="IMG_0630.png" style="width: 100%;" alt="Hoàn thành">
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="btn-nav btn-prev" id="btnPrev" onclick="changeStep(-1)" style="visibility: hidden;">← Quay lại</button>
+        <button class="btn-nav btn-next" id="btnNext" onclick="changeStep(1)">Bắt đầu →</button>
     </div>
 </div>
+
+<script>
+    let currentStep = 0;
+    const steps = document.querySelectorAll('.step');
+    const stepText = document.getElementById('step-text');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxK8_AWARZheR99qsdEVuZOyE2DR2e3e05oYreZOl5xOwmV1Je-EBenZHEdv31DDg0F/exec';
+
+    function changeStep(n) {
+        if (currentStep === 0 && n === 1) {
+            const name = document.getElementById('full-name').value.trim();
+            const phone = document.getElementById('zalo-phone').value.trim();
+
+            if (name === "" || phone === "") {
+                alert("Bạn vui lòng điền đầy đủ Họ tên và SĐT nhé!");
+                return;
+            }
+
+            btnNext.innerText = "Đang lưu...";
+            btnNext.disabled = true;
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}`
+            })
+            .then(() => {
+                btnNext.disabled = false;
+                moveNext();
+            })
+            .catch(error => {
+                console.error('Lỗi!', error);
+                btnNext.disabled = false;
+                moveNext();
+            });
+            return; 
+        }
+
+        if (currentStep === 3 && n === 1) {
+            const confirmZalo = confirm("Bây giờ hệ thống sẽ yêu cầu Mã xác minh. Bạn có muốn nhắn tin cho Mạnh để lấy mã không?");
+            if (confirmZalo) {
+                window.open("https://zalo.me/0559939036", "_blank");
+            }
+            moveNext();
+            return;
+        }
+
+        n === 1 ? moveNext() : movePrev();
+    }
+
+    function moveNext() {
+        if (currentStep < steps.length - 1) {
+            steps[currentStep].classList.remove('active');
+            currentStep++;
+            updateUI();
+        } else {
+            alert("Chúc mừng! Bạn đã hoàn thành cài đặt Locket Gold.");
+        }
+    }
+
+    function movePrev() {
+        if (currentStep > 0) {
+            steps[currentStep].classList.remove('active');
+            currentStep--;
+            updateUI();
+        }
+    }
+
+    function updateUI() {
+        steps[currentStep].classList.add('active');
+        if (currentStep === 0) {
+            stepText.innerText = "Thông tin cá nhân";
+            btnNext.innerText = "Bắt đầu →";
+        } else {
+            stepText.innerText = `Bước ${currentStep} / ${steps.length - 1}`;
+            btnNext.innerText = currentStep === steps.length - 1 ? 'Xong ✅' : 'Tiếp →';
+        }
+        btnPrev.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+        window.scrollTo(0, 0);
+    }
+
+    function copyText(id, btn) {
+        const copyInput = document.getElementById(id);
+        copyInput.select();
+        copyInput.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(copyInput.value).then(() => {
+            const oldText = btn.innerText;
+            btn.innerText = "Đã chép!";
+            btn.style.background = "#059669";
+            setTimeout(() => { 
+                btn.innerText = oldText; 
+                btn.style.background = "#10b981";
+            }, 2000);
+        });
+    }
+    
+    updateUI();
+</script>
+
+</body>
+</html>
